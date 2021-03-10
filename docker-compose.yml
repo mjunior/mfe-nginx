@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  driver-manager:
+    container_name: driver-manager
+    build:
+      context: ./driver-manager
+
+  vehicle-manager:
+    container_name: vehicle-manager
+    build:
+      context: ./vehicle-manager
+
+  orchestrator:
+    container_name: orchestrator
+    ports:
+      - 80:80
+    depends_on:
+      - vehicle-manager
+      - driver-manager
+    build:
+      context: .
